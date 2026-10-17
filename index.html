@@ -4,25 +4,25 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Jack Irving</title>
-<meta name="description" content="Construction PM from Doncaster. Greenside Projects, Elysium, SafeScrape, Two Trees Outdoors, and fine art prints from South America.">
+<meta name="description" content="Construction PM from Doncaster. Greenside Projects, Elysium, ChaseMate, SafeScrape, Two Trees Outdoors, the Grub’dup meal planner and fine art prints from South America.">
 <meta property="og:title" content="Jack Irving">
-<meta property="og:description" content="Construction PM from Doncaster. Businesses, prints, travel and contact.">
+<meta property="og:description" content="Construction PM from Doncaster. Businesses, the Grub’dup meal planner, prints, travel and contact.">
 <meta property="og:image" content="https://irvo.me/img/og.jpg">
 <meta property="og:url" content="https://irvo.me">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0F1012">
+<meta name="theme-color" content="#0D1310">
 <link rel="icon" href="img/avatar.jpg">
 <link rel="canonical" href="https://irvo.me/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap">
 <style>
 /* Layout: one calm reading column (about 680px) like a well-kept notebook.
    Photo header, name, work as a ruled list, prints as a wider gallery that breaks out of the column,
    places as a photo grid, contact. Deliberately dark only. */
 :root{
-  --bg:#0F1012; --raise:#16181B; --raise2:#1B1D21; --line:#25282D; --line2:#3A3E45;
-  --fg:#ECEAE6; --body:#C9C7C2; --muted:#9A9DA3; --faint:#6E727A; --accent:#E2A05B;
+  --bg:#0D1310; --raise:#141C17; --raise2:#1A241E; --line:#24302A; --line2:#35463C;
+  --fg:#ECEFE9; --body:#C7CDC5; --muted:#97A39A; --faint:#6E7A71; --accent:#8CC56F;
   --f-sans:"Schibsted Grotesk",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
   color-scheme:dark;
@@ -42,8 +42,11 @@ a{color:inherit;text-decoration:none}
 /* header photo */
 .cover{position:relative;aspect-ratio:16/9;max-width:100%;border-radius:14px;overflow:hidden;background:var(--raise)}
 .cover img{width:100%;height:100%;object-fit:cover;object-position:60% 45%;display:block;animation:settle 1.8s cubic-bezier(.2,.7,.2,1) both}
-.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(15,16,18,.55))}
-.cover .tag{position:absolute;right:12px;bottom:10px;z-index:1;font:500 11px/1 var(--f-mono);color:rgba(236,234,230,.85)}
+.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(13,19,16,.45))}
+.cover::before{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:var(--bg);z-index:2}
+.ridge{position:absolute;left:0;right:0;bottom:-2px;width:100%;height:calc(24% + 2px);z-index:1;pointer-events:none;display:block}
+@media (max-width:560px){.ridge{height:calc(30% + 2px)}}
+.cover .tag{position:absolute;right:12px;top:10px;z-index:2;font:500 11px/1 var(--f-mono);color:rgba(236,234,230,.85)}
 @keyframes settle{from{transform:scale(1.06)}to{transform:none}}
 
 /* intro */
@@ -57,8 +60,8 @@ h1{font-size:clamp(30px,6vw,38px);line-height:1.1;font-weight:700;letter-spacing
 .btn{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border:1px solid var(--line);border-radius:999px;font:500 14px/1 var(--f-sans);color:var(--fg);background:var(--raise);transition:border-color .2s,background .2s;cursor:pointer}
 .btn:hover{border-color:var(--line2);background:var(--raise2)}
 .btn svg{width:16px;height:16px}
-.btn.solid{background:var(--accent);border-color:var(--accent);color:#1A1208}
-.btn.solid:hover{background:#ECB06F;border-color:#ECB06F}
+.btn.solid{background:var(--accent);border-color:var(--accent);color:#10200C}
+.btn.solid:hover{background:#9FD382;border-color:#9FD382}
 
 .rise{animation:rise .7s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--d,0) * 70ms + 150ms)}
 @keyframes rise{from{transform:translateY(10px);opacity:.3}to{transform:none;opacity:1}}
@@ -71,16 +74,19 @@ section{margin-top:56px}
 /* work list */
 .work{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
 .work li{border-bottom:1px solid var(--line)}
-.row{display:grid;grid-template-columns:1fr auto;gap:4px 16px;align-items:center;padding:16px 10px;margin-inline:-10px;border-radius:10px;transition:background .2s}
-a.row:hover{background:var(--raise)}
+.row{display:grid;grid-template-columns:auto 1fr auto;gap:4px 14px;align-items:center;padding:16px 10px;margin-inline:-10px;border-radius:10px;transition:background .2s}
+.mk{grid-row:span 2;align-self:start;width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:var(--c);color:var(--t);font:700 15px/1 var(--f-sans);letter-spacing:-.02em}
+.row .name strong{color:color-mix(in srgb,var(--c,var(--fg)) 22%,var(--fg))}
+.mk.solid{color:var(--on,#0D1310)}
+a.row:hover{background:color-mix(in srgb,var(--c,#fff) 7%,var(--bg))}
 .row .name{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;min-width:0}
 .row strong{font-size:17px;font-weight:600}
 .row .what{font-size:14px;color:var(--muted)}
-.row .desc{grid-column:1/-1;font-size:15px;color:#BDBBB6;margin:0;max-width:56ch}
-.row .meta{font:400 12.5px/1 var(--f-mono);color:var(--muted);display:flex;align-items:center;gap:8px;white-space:nowrap}
+.row .desc{grid-column:2/-1;font-size:15px;color:var(--body);margin:0;max-width:56ch}
+.row .meta{font:400 12.5px/1 var(--f-mono);color:color-mix(in srgb,var(--c,var(--muted)) 75%,var(--fg));display:flex;align-items:center;gap:8px;white-space:nowrap}
 .row .arrow{display:inline-block;transition:transform .25s}
 a.row:hover .arrow{transform:translate(2px,-2px);color:var(--fg)}
-.soon{font:500 11px/1 var(--f-mono);color:var(--accent);border:1px solid rgba(226,160,91,.35);padding:5px 8px;border-radius:999px}
+.soon{font:500 11px/1 var(--f-mono);color:var(--c,var(--accent));border:1px solid color-mix(in srgb,var(--c,var(--accent)) 45%,transparent);padding:5px 8px;border-radius:999px}
 
 /* ===== prints: breaks out of the 640px text column to ~1040px on wide screens ===== */
 .bleed{margin-inline:calc((min(640px, 100vw - 40px) - min(1040px, 100vw - 40px)) / 2)}
@@ -110,6 +116,41 @@ a.row:hover .arrow{transform:translate(2px,-2px);color:var(--fg)}
 .trade{margin-top:8px;display:grid;grid-template-columns:1fr auto;gap:10px 20px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:18px 20px;background:var(--raise)}
 .trade p{margin:0;color:var(--body);font-size:15px;min-width:0}
 .trade strong{color:var(--fg);font-weight:600}
+
+/* Grub'dup feature: wears Grub'dup's own colours so it stands apart from the dark page */
+.feat{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);background:#F6F2E9;color:#17201A;border-radius:18px;overflow:hidden;margin:0 0 22px;text-decoration:none;box-shadow:0 0 0 1px rgba(183,206,71,.35),0 18px 50px -20px rgba(0,0,0,.6);transition:transform .25s}
+.feat:hover{transform:translateY(-2px)}
+.feat:focus-visible{outline:2px solid #B7CE47;outline-offset:4px}
+.fpics{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:3px;min-height:100%;background:#1F4D38}
+.fpics img{width:100%;height:100%;object-fit:cover;display:block}
+.fpics img:first-child{grid-row:span 2}
+.fbody{padding:22px 22px 24px;display:grid;gap:12px;align-content:center}
+.fhead{display:flex;align-items:center;gap:12px}
+.gmark{width:44px;height:44px;border-radius:12px;background:#1F4D38;color:#F6F2E9;display:grid;place-items:center;font:700 24px/1 'Fraunces',Georgia,serif}
+.feat h3{margin:0;font:700 32px/1 'Fraunces',Georgia,serif;letter-spacing:-.01em;color:#1F4D38}
+.fsub{font-size:14px;color:#4E5A50;margin:3px 0 0}
+.feat p{margin:0;font-size:15.5px;line-height:1.55;color:#2B342D}
+.facts{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.facts li{font-size:13px;font-weight:600;color:#1F4D38;background:rgba(183,206,71,.32);border-radius:999px;padding:6px 11px}
+.fcta{justify-self:start;display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 18px;border-radius:12px;background:#1F4D38;color:#F6F2E9;font-weight:600;font-size:15px}
+.feat:hover .fcta{background:#173C2C}
+.btn.grub{background:#1F4D38;border-color:#2E6A4F;color:#F6F2E9}
+.btn.grub:hover{background:#265C44;border-color:#3A7D5E}
+.btn.grub .gdot{width:18px;height:18px;border-radius:5px;background:#B7CE47;color:#1F4D38;display:grid;place-items:center;font:700 12px/1 'Fraunces',Georgia,serif}
+
+/* film */
+.vid{display:block;position:relative;border-radius:14px;overflow:hidden;background:var(--raise)}
+.vid img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.vid:hover img{transform:scale(1.02)}
+.vid::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(13,19,16,.8))}
+.play{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:68px;height:68px;border-radius:50%;background:rgba(13,19,16,.72);border:1px solid rgba(255,255,255,.25);display:grid;place-items:center;z-index:1;transition:background .2s}
+.vid:hover .play{background:#C4302B}
+.play svg{width:26px;height:26px;margin-left:4px}
+.vcap{position:absolute;left:16px;right:16px;bottom:14px;z-index:1}
+.vcap b{display:block;font-size:18px;font-weight:600;line-height:1.25}
+.vcap span{display:block;font:400 12px/1.5 var(--f-mono);color:#C7CDC5;margin-top:4px}
+.vcredit{margin:10px 0 0;font-size:13px;color:var(--faint)}
+.vcredit a{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
 
 /* places */
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
@@ -159,7 +200,7 @@ legend{font:500 11.5px/1 var(--f-mono);letter-spacing:.08em;text-transform:upper
 .opt .sz{font-size:14.5px;font-weight:500}
 .opt .sz small{display:block;font:400 11.5px/1.4 var(--f-mono);color:var(--muted);font-weight:400}
 .opt .pr{font:500 14px/1 var(--f-mono);font-variant-numeric:tabular-nums}
-.opt:has(input:checked){border-color:var(--accent);background:rgba(226,160,91,.06)}
+.opt:has(input:checked){border-color:var(--accent);background:rgba(140,197,111,.07)}
 .order{display:grid;gap:10px}
 .order .note{font-size:13.5px;color:var(--muted);margin:0}
 .order .note b{color:var(--fg);font-weight:500}
@@ -171,8 +212,15 @@ legend{font:500 11.5px/1 var(--f-mono);letter-spacing:.08em;text-transform:upper
   .pd .img{padding:22px 16px}
   .pd .img img{max-height:52vh;box-shadow:0 0 0 6px #F4F2EE, 0 10px 30px rgba(0,0,0,.5)}
 }
+@media (max-width:640px){
+  .feat{grid-template-columns:1fr}
+  .fpics{grid-template-columns:2fr 1fr 1fr;grid-template-rows:none;height:150px}
+  .fpics img:first-child{grid-row:auto}
+  .feat h3{font-size:28px}
+}
 @media (max-width:560px){
   .grid{grid-template-columns:repeat(2,1fr)}
+  .mk{width:36px;height:36px;font-size:13px;border-radius:10px}
   .gallery{columns:2 150px;column-gap:10px}
   .pc .cap{flex-direction:column;gap:2px}
   .avatar{width:84px;height:84px;margin-left:12px}
@@ -189,15 +237,21 @@ legend{font:500 11.5px/1 var(--f-mono);letter-spacing:.08em;text-transform:upper
   <div class="top">
     <span>irvo.me</span>
     <nav aria-label="Sections">
+      <a href="/grubdup/">Grub’dup</a>
       <a href="#work">Work</a>
       <a href="#prints">Prints</a>
       <a href="#places">Places</a>
+      <a href="#film">Film</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
 
   <div class="cover">
     <img src="img/patagonia.jpg" alt="Road through Patagonia with the Fitz Roy range ahead" width="1086" height="724">
+    <svg class="ridge" viewBox="0 0 1200 160" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="#0D1310" d="M0 160V118l70-20 50 14 70-46 40 20 55-50 28 22 36-56 18 26 22-40 20 34 30-24 32 56 70 18 80-30 60 24 90-28 70 26 80-34 50 18 60-30 40 20 60 4 50-20 70 22v106z"/>
+      <path fill="none" stroke="#ECEFE9" stroke-opacity=".55" stroke-width="1.6" vector-effect="non-scaling-stroke" stroke-linejoin="round" d="M0 118l70-20 50 14 70-46 40 20 55-50 28 22 36-56 18 26 22-40 20 34 30-24 32 56 70 18 80-30 60 24 90-28 70 26 80-34 50 18 60-30 40 20 60 4 50-20 70 22"/>
+    </svg>
     <span class="tag">Patagonia</span>
   </div>
 
@@ -210,6 +264,7 @@ legend{font:500 11.5px/1 var(--f-mono);letter-spacing:.08em;text-transform:upper
     <p class="bio rise" style="--d:2">I like to travel the world, take pictures and build things.</p>
     <p class="aside rise" style="--d:2">I also think I have ADHD...</p>
     <div class="social rise" style="--d:3">
+      <a class="btn grub" href="/grubdup/"><span class="gdot" aria-hidden="true">G</span>Grub’dup meal planner</a>
       <a class="btn" href="https://instagram.com/jackirv0" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a>
       <a class="btn" href="https://www.youtube.com/@worldwide_jack" target="_blank" rel="noopener">
@@ -223,6 +278,19 @@ legend{font:500 11.5px/1 var(--f-mono);letter-spacing:.08em;text-transform:upper
 
   <section id="work" aria-labelledby="l-work">
     <h2 class="label" id="l-work">Work</h2>
+    <a class="feat" href="/grubdup/" aria-label="Open Grub’dup, the free meal planner">
+      <span class="fpics" aria-hidden="true">
+        <img src="grubdup/photos/54.jpg" alt="" loading="lazy">
+        <img src="grubdup/photos/76.jpg" alt="" loading="lazy">
+        <img src="grubdup/photos/41.jpg" alt="" loading="lazy">
+      </span>
+      <span class="fbody">
+        <span class="fhead"><span class="gmark" aria-hidden="true">G</span><span><h3>Grub’dup</h3><span class="fsub">Free meal planner, built by me</span></span></span>
+        <p>Can't decide what to eat? It picks a healthy dinner for you, plans the week and writes the shopping list using real pack sizes and supermarket prices.</p>
+        <ul class="facts"><li>166 recipes</li><li>Plans 7 dinners in one tap</li><li>Works offline on your phone</li></ul>
+        <span class="fcta">Open Grub’dup</span>
+      </span>
+    </a>
     <ul class="work" id="workList"></ul>
   </section>
 
@@ -252,6 +320,16 @@ legend{font:500 11.5px/1 var(--f-mono);letter-spacing:.08em;text-transform:upper
   <section id="places" aria-labelledby="l-places">
     <h2 class="label" id="l-places"><span>Places</span><span class="r">Tap to enlarge</span></h2>
     <div class="grid" id="grid"></div>
+  </section>
+
+  <section id="film" aria-labelledby="l-film">
+    <h2 class="label" id="l-film"><span>Film</span><span class="r">YouTube</span></h2>
+    <a class="vid" href="https://youtu.be/DmN5duTaBKY" target="_blank" rel="noopener">
+      <img src="img/film/santiago-ushuaia.jpg" alt="Our muddy Honda CR-V on the road to El Chaltén with Fitz Roy behind" width="960" height="640" loading="lazy">
+      <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M7 4.5v15l13-7.5z"/></svg></span>
+      <span class="vcap"><b>Hammock camping road trip: Santiago to Ushuaia</b><span>Chile and Argentina, through Patagonia by car</span></span>
+    </a>
+    <p class="vcredit">On <a href="https://www.youtube.com/@jaredharbon9797" target="_blank" rel="noopener">Jared Harbon's channel</a>. More from the trip on <a href="https://www.youtube.com/@worldwide_jack" target="_blank" rel="noopener">WorldWideJack</a>.</p>
   </section>
 
   <section id="guides" aria-labelledby="l-guides" hidden>
@@ -315,12 +393,13 @@ legend{font:500 11.5px/1 var(--f-mono);letter-spacing:.08em;text-transform:upper
 <script>
 /* ===== Edit content here. url:null shows "Launching soon" and no link. ===== */
 const WORK = [
-  {name:"Greenside Projects", what:"Owner", desc:"Building and groundworks around Doncaster. Kitchens, bathrooms, driveways, patios and drainage. 5.0 on Google.", url:"https://greensideprojects.com"},
-  {name:"Elysium", what:"Founder", desc:"Construction project management for commercial and residential builds.", url:null},
-  {name:"SafeScrape", what:"Founder", desc:"A nylon thumb scraper for burnt-on mess, stickers and wax. Scrapes everything, scratches nothing.", url:"https://safescrape.co.uk"},
-  {name:"Two Trees Outdoors", what:"Co-founder", desc:"Hammocks and tarps for wild camping. Two trees planted for every order.", url:"https://twotreesoutdoors.com"},
-  {name:"Grub’dup", what:"Side project", desc:"A free meal planner for friends and family. It picks dinners, plans the week and writes the shopping list.", url:"/grubdup/"},
-  {name:"Irvo Prints", what:"Photographer", desc:"Fine art prints from South America and home, shot on a Sony A7C II and a DJI drone.", url:"#prints"},
+  /* c = brand colour, t = tile background, m = letters on the tile */
+  {name:"Greenside Projects", what:"Owner", m:"GP", c:"#6FB07E", t:"#1C3123", desc:"Building and groundworks around Doncaster. Kitchens, bathrooms, driveways, patios and drainage. 5.0 on Google.", url:"https://greensideprojects.com"},
+  {name:"Elysium", what:"Founder", m:"E", c:"#9FC2D0", t:"#131E26", desc:"Construction project management for contractors and developers across the UK, from pre-construction to handover.", url:"https://elysiumprojectmanagement.com"},
+  {name:"ChaseMate", what:"Founder", m:"CM", c:"#E2AE3A", t:"#16243D", desc:"Chases quotes and unpaid invoices for UK tradespeople by email and text, written the way you write.", url:"https://mychasemate.co.uk"},
+  {name:"SafeScrape", what:"Founder", m:"SS", c:"#2BB5A0", t:"#0F2A26", desc:"A nylon thumb scraper for burnt-on mess, stickers and wax. Scrapes everything, scratches nothing.", url:"https://safescrape.co.uk"},
+  {name:"Two Trees Outdoors", what:"Co-founder", m:"TT", c:"#EE5B3A", t:"#33170F", desc:"Hammocks and tarps for wild camping. Two trees planted for every order.", url:"https://twotreesoutdoors.com"},
+  {name:"Irvo Prints", what:"Photographer", m:"IP", c:"#E896B4", t:"#331A27", desc:"Fine art prints from South America and home, shot on a Sony A7C II and a DJI drone.", url:"#prints"},
 ];
 
 /* Prices in GBP. `buy` is the checkout link for that print (e.g. a Shopify product URL).
@@ -411,12 +490,14 @@ const openD = d => { if (typeof d.showModal === "function") d.showModal(); else 
 
 function rows(list, el){
   el.innerHTML = list.map(w => {
-    const inner = `<span class="name"><strong>${esc(w.name)}</strong>${w.what?`<span class="what">${esc(w.what)}</span>`:""}</span>
+    const tile = w.m ? `<span class="mk" aria-hidden="true">${esc(w.m)}</span>` : "";
+    const inner = `${tile}<span class="name"><strong>${esc(w.name)}</strong>${w.what?`<span class="what">${esc(w.what)}</span>`:""}</span>
       <span class="meta">${w.url ? `<span class="host">${esc(host(w.url))}</span> <span class="arrow">${w.url.startsWith("#")?"↓":w.url.startsWith("/")?"→":"↗"}</span>` : `<span class="soon">Launching soon</span>`}</span>
       <p class="desc">${esc(w.desc)}</p>`;
-    if (!w.url) return `<li><div class="row">${inner}</div></li>`;
+    const st = w.c ? ` style="--c:${w.c};--t:${w.t||"transparent"}"` : "";
+    if (!w.url) return `<li><div class="row"${st}>${inner}</div></li>`;
     const ext = !w.url.startsWith("#") && !w.url.startsWith("/");
-    return `<li><a class="row" href="${esc(w.url)}"${ext?` target="_blank" rel="noopener${el.id==="kitList"?" sponsored":""}"`:""}>${inner}</a></li>`;
+    return `<li><a class="row"${st} href="${esc(w.url)}"${ext?` target="_blank" rel="noopener${el.id==="kitList"?" sponsored":""}"`:""}>${inner}</a></li>`;
   }).join("");
 }
 rows(WORK, $("#workList"));
