@@ -2314,7 +2314,7 @@ $("#v-list").addEventListener("click",e=>{const b=e.target.closest("button");
     if(b.hasAttribute("data-shop")){openShop();return;}
     if(b.dataset.go2){go(b.dataset.go2);return;}
     if(b.hasAttribute("data-sharelist")){shareText("Shopping list",listText());return;}
-    if(b.hasAttribute("data-wa")){window.open("https://wa.me/?text="+encodeURIComponent(listText()),"_blank");return;}
+    if(b.hasAttribute("data-wa")){openWhatsApp(listText());return;}
     if(b.hasAttribute("data-copy")){copyText(listText());return;}
     if(b.hasAttribute("data-printlist")){doPrint("print-list");return;}
     if(b.hasAttribute("data-hide")){S.hideTicked=!S.hideTicked;save();renderList();return;}
@@ -2326,11 +2326,16 @@ $("#v-list").addEventListener("click",e=>{const b=e.target.closest("button");
     if(S.hideTicked)renderList();else{li.classList.toggle("done",!!S.checked[k]);const{items}=buildList();const tb=items.filter(i=>!S.pantry[i.n]);const sp=$("#trolley");if(sp)sp.textContent=`${tb.filter(i=>!i.fromCarry&&S.checked[i.k]).length} of ${tb.filter(i=>!i.fromCarry).length} in the trolley · tap 🏠 for things you've already got`;}}});
 const servTxt=p=>"serves "+p.serv+(p.lunch?" + "+p.lunch+" lunch"+(p.lunch>1?"es":""):"");
 function listText(){const{items}=buildList();const groups={};items.forEach(i=>(groups[i.c]=groups[i.c]||[]).push(i));
-  let t="🛒 Shopping list (Grub’dup)\n\nMeals:\n"+[...S.plan].sort((a,b)=>(a.day==null?99:a.day)-(b.day==null?99:b.day)).map(p=>"• "+(p.day!=null?DAYS[p.day].slice(0,3)+": ":"")+byId[p.id].name+" ("+servTxt(p)+")").join("\n")+"\n";
-  Object.keys(CATS).sort((a,b)=>CATS[a].o-CATS[b].o).forEach(c=>{const g=(groups[c]||[]).filter(i=>!S.pantry[i.n]);if(!g.length)return;g.sort((a,b)=>a.n.localeCompare(b.n));
-    g=g.filter(i=>!i.fromCarry);if(!g.length)return;
+  let t="Shopping list (Grub’dup)\n\nMeals:\n"+[...S.plan].sort((a,b)=>(a.day==null?99:a.day)-(b.day==null?99:b.day)).map(p=>"• "+(p.day!=null?DAYS[p.day].slice(0,3)+": ":"")+byId[p.id].name+" ("+servTxt(p)+")").join("\n")+"\n";
+  Object.keys(CATS).sort((a,b)=>CATS[a].o-CATS[b].o).forEach(c=>{const g=(groups[c]||[]).filter(i=>!S.pantry[i.n]&&!i.fromCarry);if(!g.length)return;g.sort((a,b)=>a.n.localeCompare(b.n));
     t+="\n"+CATS[c].l.toUpperCase()+"\n"+g.map(i=>{const b=buyLabel(i),sw=swapFor(i.n);return "☐ "+i.n+(sw?" (or "+sw+")":"")+": "+(b?b+" (need "+needLabel(i)+")":needLabel(i));}).join("\n")+"\n";});
   const total=items.filter(i=>!S.pantry[i.n]).reduce((s,i)=>s+i.till,0);return t+"\nEstimated at the till: "+gbp(total);}
+// iPhone: open the WhatsApp app directly, and fall back to the web link if it isn't installed
+function openWhatsApp(text){const enc=encodeURIComponent(text);
+  if(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)){let left=false;const onHide=()=>{left=true;};document.addEventListener("visibilitychange",onHide,{once:true});
+    location.href="whatsapp://send?text="+enc;
+    setTimeout(()=>{document.removeEventListener("visibilitychange",onHide);if(!left&&!document.hidden)location.href="https://wa.me/?text="+enc;},1500);return;}
+  window.open("https://web.whatsapp.com/send?text="+enc,"_blank","noopener");}
 async function shareText(title,text){if(navigator.share){try{await navigator.share({title,text});return;}catch(e){if(e&&e.name==="AbortError")return;}}copyText(text);}
 function copyText(t){const ok=()=>toast("Copied, paste it into Notes or a message");
   if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(ok,()=>fbCopy(t,ok));}else fbCopy(t,ok);}

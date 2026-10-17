@@ -1,6 +1,6 @@
 // Grub’dup offline support: keeps a copy of the app on the phone so it opens with no signal.
 // Change VERSION whenever you upload a new index.html so phones pick up the update.
-const VERSION = "grubdup-2026-10-17c";
+const VERSION = "grubdup-2026-10-17d";
 const CORE = ["./", "index.html", "manifest.webmanifest", "apple-touch-icon.png", "icon-192.png", "icon-512.png"];
 
 self.addEventListener("install", e => {
