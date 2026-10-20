@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Jack Irving</title>
-<meta name="description" content="Construction PM from Doncaster. Greenside Projects, Elysium, ChaseMate, SafeScrape, Two Trees Outdoors, the Grub’dup meal planner and fine art prints from South America.">
-<meta property="og:title" content="Jack Irving">
-<meta property="og:description" content="Construction PM from Doncaster. Businesses, the Grub’dup meal planner, prints, travel and contact.">
+<title>Jack</title>
+<meta name="description" content="Construction PM from Doncaster. Greenside Projects, Elysium, ChaseMate, SafeScrape, Two Trees Outdoors and fine art prints from the mountains of South America.">
+<meta property="og:title" content="Jack">
+<meta property="og:description" content="Construction PM from Doncaster. Businesses, prints, mountains, travel and contact.">
 <meta property="og:image" content="https://irvo.me/img/og.jpg">
 <meta property="og:url" content="https://irvo.me">
 <meta name="twitter:card" content="summary_large_image">
@@ -29,29 +29,32 @@
 }
 *{box-sizing:border-box}
 html{background:var(--bg)}
-body{background:var(--bg);color:var(--fg);font-family:var(--f-sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;margin:0;position:relative;overflow-x:hidden}
+/* faint contour lines behind the whole page, like an OS map */
+.topo{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.06;color:#ECEFE9}
+.topo svg{width:100%;height:100%;display:block}
+.wrap,footer{position:relative;z-index:1}
 a{color:inherit;text-decoration:none}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
 .wrap{max-width:680px;margin:0 auto;padding-left:max(20px, env(safe-area-inset-left, 0px));padding-right:max(20px, env(safe-area-inset-right, 0px));padding-block:20px 56px}
 
-/* top bar */
-.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font:500 12.5px/1 var(--f-mono);color:var(--muted);padding-block:6px 18px}
-.top nav{display:flex;gap:16px;flex-wrap:wrap}
-.top a:hover{color:var(--fg)}
-
-/* header photo */
-.cover{position:relative;aspect-ratio:16/9;max-width:100%;border-radius:14px;overflow:hidden;background:var(--raise)}
-.cover img{width:100%;height:100%;object-fit:cover;object-position:60% 45%;display:block;animation:settle 1.8s cubic-bezier(.2,.7,.2,1) both}
-.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(13,19,16,.45))}
-.cover::before{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:var(--bg);z-index:2}
-.ridge{position:absolute;left:0;right:0;bottom:-2px;width:100%;height:calc(24% + 2px);z-index:1;pointer-events:none;display:block}
-@media (max-width:560px){.ridge{height:calc(30% + 2px)}}
-.cover .tag{position:absolute;right:12px;top:10px;z-index:2;font:500 11px/1 var(--f-mono);color:rgba(236,234,230,.85)}
+/* header photo with layered ridgelines */
+.cover{position:relative;aspect-ratio:16/10;max-width:100%;border-radius:14px;overflow:hidden;background:var(--raise)}
+.cover img{width:100%;height:100%;object-fit:cover;object-position:60% 40%;display:block;animation:settle 1.8s cubic-bezier(.2,.7,.2,1) both}
+.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,19,16,.15),transparent 30%,transparent 50%,rgba(13,19,16,.5))}
+.cover::before{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:var(--bg);z-index:3}
+.ridge{position:absolute;left:0;right:0;bottom:-2px;width:100%;pointer-events:none;display:block}
+.ridge.r1{height:36%;z-index:1}
+.ridge.r2{height:30%;z-index:1}
+.ridge.r3{height:calc(22% + 2px);z-index:2}
+@media (max-width:560px){.ridge.r1{height:40%}.ridge.r2{height:34%}.ridge.r3{height:calc(27% + 2px)}}
+.cover .tag{position:absolute;right:12px;top:12px;z-index:3;display:flex;align-items:center;gap:7px;font:500 11px/1 var(--f-mono);color:rgba(236,234,230,.9);background:rgba(13,19,16,.45);padding:7px 9px;border-radius:999px;backdrop-filter:blur(4px)}
+.cover .tag svg{width:11px;height:11px}
 @keyframes settle{from{transform:scale(1.06)}to{transform:none}}
 
 /* intro */
 .intro{position:relative;margin-top:-44px;display:grid;gap:14px}
-.avatar{width:96px;height:96px;border-radius:50%;border:4px solid var(--bg);object-fit:cover;margin-left:16px;position:relative;z-index:2;background:var(--raise)}
+.avatar{width:96px;height:96px;border-radius:50%;border:4px solid var(--bg);object-fit:cover;margin-left:16px;position:relative;z-index:4;background:var(--raise)}
 h1{font-size:clamp(30px,6vw,38px);line-height:1.1;font-weight:700;letter-spacing:-.02em;margin:4px 0 0;text-wrap:balance}
 .role{font-size:17px;color:var(--muted);margin:0}
 .bio{margin:4px 0 0;max-width:58ch;color:var(--body)}
@@ -66,9 +69,12 @@ h1{font-size:clamp(30px,6vw,38px);line-height:1.1;font-weight:700;letter-spacing
 .rise{animation:rise .7s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--d,0) * 70ms + 150ms)}
 @keyframes rise{from{transform:translateY(10px);opacity:.3}to{transform:none;opacity:1}}
 
-/* sections */
-section{margin-top:56px}
-.label{font:500 12px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin:0 0 14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+/* sections: each starts with a small ridgeline instead of a plain rule */
+section{margin-top:60px}
+.ridgeline{display:block;width:100%;height:22px;margin:0 0 16px;color:var(--line2)}
+.label{font:500 12px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin:0 0 14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+.label .l{display:inline-flex;align-items:center;gap:8px}
+.label .l svg{width:13px;height:13px;color:var(--accent)}
 .label .r{letter-spacing:.02em;text-transform:none}
 
 /* work list */
@@ -117,27 +123,6 @@ a.row:hover .arrow{transform:translate(2px,-2px);color:var(--fg)}
 .trade p{margin:0;color:var(--body);font-size:15px;min-width:0}
 .trade strong{color:var(--fg);font-weight:600}
 
-/* Grub'dup feature: wears Grub'dup's own colours so it stands apart from the dark page */
-.feat{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);background:#F6F2E9;color:#17201A;border-radius:18px;overflow:hidden;margin:0 0 22px;text-decoration:none;box-shadow:0 0 0 1px rgba(183,206,71,.35),0 18px 50px -20px rgba(0,0,0,.6);transition:transform .25s}
-.feat:hover{transform:translateY(-2px)}
-.feat:focus-visible{outline:2px solid #B7CE47;outline-offset:4px}
-.fpics{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:3px;min-height:100%;background:#1F4D38}
-.fpics img{width:100%;height:100%;object-fit:cover;display:block}
-.fpics img:first-child{grid-row:span 2}
-.fbody{padding:22px 22px 24px;display:grid;gap:12px;align-content:center}
-.fhead{display:flex;align-items:center;gap:12px}
-.gmark{width:44px;height:44px;border-radius:12px;background:#1F4D38;color:#F6F2E9;display:grid;place-items:center;font:700 24px/1 'Fraunces',Georgia,serif}
-.feat h3{margin:0;font:700 32px/1 'Fraunces',Georgia,serif;letter-spacing:-.01em;color:#1F4D38}
-.fsub{font-size:14px;color:#4E5A50;margin:3px 0 0}
-.feat p{margin:0;font-size:15.5px;line-height:1.55;color:#2B342D}
-.facts{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
-.facts li{font-size:13px;font-weight:600;color:#1F4D38;background:rgba(183,206,71,.32);border-radius:999px;padding:6px 11px}
-.fcta{justify-self:start;display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 18px;border-radius:12px;background:#1F4D38;color:#F6F2E9;font-weight:600;font-size:15px}
-.feat:hover .fcta{background:#173C2C}
-.btn.grub{background:#1F4D38;border-color:#2E6A4F;color:#F6F2E9}
-.btn.grub:hover{background:#265C44;border-color:#3A7D5E}
-.btn.grub .gdot{width:18px;height:18px;border-radius:5px;background:#B7CE47;color:#1F4D38;display:grid;place-items:center;font:700 12px/1 'Fraunces',Georgia,serif}
-
 /* film */
 .vid{display:block;position:relative;border-radius:14px;overflow:hidden;background:var(--raise)}
 .vid img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
@@ -167,7 +152,9 @@ a.row:hover .arrow{transform:translate(2px,-2px);color:var(--fg)}
 .mailrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
 .mail{font:500 15px/1 var(--f-mono);user-select:all;word-break:break-all}
 
-footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font:400 12px/1.4 var(--f-mono);color:var(--faint)}
+footer{margin-top:72px;display:grid;gap:14px;font:400 12px/1.4 var(--f-mono);color:var(--faint)}
+.range{display:block;width:100%;height:auto;color:var(--raise2)}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 
 /* dialogs */
 dialog{border:0;padding:0;background:transparent;color:var(--fg)}
@@ -212,12 +199,6 @@ legend{font:500 11.5px/1 var(--f-mono);letter-spacing:.08em;text-transform:upper
   .pd .img{padding:22px 16px}
   .pd .img img{max-height:52vh;box-shadow:0 0 0 6px #F4F2EE, 0 10px 30px rgba(0,0,0,.5)}
 }
-@media (max-width:640px){
-  .feat{grid-template-columns:1fr}
-  .fpics{grid-template-columns:2fr 1fr 1fr;grid-template-rows:none;height:150px}
-  .fpics img:first-child{grid-row:auto}
-  .feat h3{font-size:28px}
-}
 @media (max-width:560px){
   .grid{grid-template-columns:repeat(2,1fr)}
   .mk{width:36px;height:36px;font-size:13px;border-radius:10px}
@@ -233,38 +214,40 @@ legend{font:500 11.5px/1 var(--f-mono);letter-spacing:.08em;text-transform:upper
 </style>
 </head>
 <body>
+<div class="topo" aria-hidden="true"><svg viewBox="0 0 800 1200" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="currentColor" stroke-width="1">
+  <path d="M520 160c90 10 150 70 140 150s-90 120-180 110-140-80-120-160 70-110 160-100z"/>
+  <path d="M515 120c120 10 200 90 185 200s-120 160-240 150-185-110-165-215 100-145 220-135z"/>
+  <path d="M505 75c150 15 250 115 230 250s-150 200-300 185-230-140-205-270 125-180 275-165z"/>
+  <path d="M495 25c180 20 300 140 275 300s-180 245-360 225-275-170-245-325 150-220 330-200z"/>
+  <path d="M120 760c70-5 120 40 115 100s-60 95-125 90-105-55-95-110 40-75 105-80z"/>
+  <path d="M115 715c100-5 165 60 158 145s-85 135-175 128-150-80-135-160 55-108 152-113z"/>
+  <path d="M108 665c130-5 215 80 205 190s-110 175-225 165-195-105-175-210 70-140 195-145z"/>
+  <path d="M100 610c165-5 265 100 252 240s-140 220-285 208-245-130-220-265 88-178 253-183z"/>
+  <path d="M-20 1080c160-60 330-20 470 30s300 40 380-20"/>
+  <path d="M-20 1130c170-55 340-15 480 35s290 30 370-25"/>
+  <path d="M-20 420c90 40 170 30 240-10s160-60 250-20"/>
+</g></svg></div>
 <div class="wrap">
-  <div class="top">
-    <span>irvo.me</span>
-    <nav aria-label="Sections">
-      <a href="/grubdup/">Grub’dup</a>
-      <a href="#work">Work</a>
-      <a href="#prints">Prints</a>
-      <a href="#places">Places</a>
-      <a href="#film">Film</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
-
   <div class="cover">
     <img src="img/patagonia.jpg" alt="Road through Patagonia with the Fitz Roy range ahead" width="1086" height="724">
-    <svg class="ridge" viewBox="0 0 1200 160" preserveAspectRatio="none" aria-hidden="true">
+    <svg class="ridge r1" viewBox="0 0 1200 200" preserveAspectRatio="none" aria-hidden="true"><path fill="#3A4C42" fill-opacity=".92" d="M0 200V96l60-24 40 16 70-58 50 30 40-22 60 44 50-36 70 40 40-20 60 30 80-62 40 26 60-18 70 40 60-30 40 20 70-44 60 36 50-16 80 30 50-20v122z"/></svg>
+    <svg class="ridge r2" viewBox="0 0 1200 180" preserveAspectRatio="none" aria-hidden="true"><path fill="#1C2822" d="M0 180V110l90-34 60 26 80-50 50 30 70-40 40 24 80-12 60 34 70-46 50 20 90-30 60 40 70-22 80 34 60-18 70 26 70-20v138z"/></svg>
+    <svg class="ridge r3" viewBox="0 0 1200 160" preserveAspectRatio="none" aria-hidden="true">
       <path fill="#0D1310" d="M0 160V118l70-20 50 14 70-46 40 20 55-50 28 22 36-56 18 26 22-40 20 34 30-24 32 56 70 18 80-30 60 24 90-28 70 26 80-34 50 18 60-30 40 20 60 4 50-20 70 22v106z"/>
       <path fill="none" stroke="#ECEFE9" stroke-opacity=".55" stroke-width="1.6" vector-effect="non-scaling-stroke" stroke-linejoin="round" d="M0 118l70-20 50 14 70-46 40 20 55-50 28 22 36-56 18 26 22-40 20 34 30-24 32 56 70 18 80-30 60 24 90-28 70 26 80-34 50 18 60-30 40 20 60 4 50-20 70 22"/>
     </svg>
-    <span class="tag">Patagonia</span>
+    <span class="tag"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M1 14 6.2 4.5l2.3 3.7L10.4 6 15 14z"/></svg>Fitz Roy · 3,405m</span>
   </div>
 
   <header class="intro">
-    <img class="avatar rise" src="img/avatar.jpg" alt="Jack Irving" width="96" height="96" style="--d:0">
+    <img class="avatar rise" src="img/avatar.jpg" alt="Jack" width="96" height="96" style="--d:0">
     <div class="rise" style="--d:1">
-      <h1>Jack Irving</h1>
+      <h1>Jack</h1>
       <p class="role">Construction PM, Doncaster</p>
     </div>
-    <p class="bio rise" style="--d:2">I like to travel the world, take pictures and build things.</p>
+    <p class="bio rise" style="--d:2">I like to travel the world, climb mountains, take pictures and build things.</p>
     <p class="aside rise" style="--d:2">I also think I have ADHD...</p>
     <div class="social rise" style="--d:3">
-      <a class="btn grub" href="/grubdup/"><span class="gdot" aria-hidden="true">G</span>Grub’dup meal planner</a>
       <a class="btn" href="https://instagram.com/jackirv0" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a>
       <a class="btn" href="https://www.youtube.com/@worldwide_jack" target="_blank" rel="noopener">
@@ -277,25 +260,14 @@ legend{font:500 11.5px/1 var(--f-mono);letter-spacing:.08em;text-transform:upper
   </header>
 
   <section id="work" aria-labelledby="l-work">
-    <h2 class="label" id="l-work">Work</h2>
-    <a class="feat" href="/grubdup/" aria-label="Open Grub’dup, the free meal planner">
-      <span class="fpics" aria-hidden="true">
-        <img src="grubdup/photos/54.jpg" alt="" loading="lazy">
-        <img src="grubdup/photos/76.jpg" alt="" loading="lazy">
-        <img src="grubdup/photos/41.jpg" alt="" loading="lazy">
-      </span>
-      <span class="fbody">
-        <span class="fhead"><span class="gmark" aria-hidden="true">G</span><span><h3>Grub’dup</h3><span class="fsub">Free meal planner, built by me</span></span></span>
-        <p>Can't decide what to eat? It picks a healthy dinner for you, plans the week and writes the shopping list using real pack sizes and supermarket prices.</p>
-        <ul class="facts"><li>166 recipes</li><li>Plans 7 dinners in one tap</li><li>Works offline on your phone</li></ul>
-        <span class="fcta">Open Grub’dup</span>
-      </span>
-    </a>
+    <svg class="ridgeline" viewBox="0 0 680 22" preserveAspectRatio="none" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round" d="M0 21h120l26-9 14 5 22-14 12 7 18-10 16 13 20-6 24 14h408"/></svg>
+    <h2 class="label" id="l-work"><span class="l"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M1 14 6.2 4.5l2.3 3.7L10.4 6 15 14z"/></svg>Work</span></h2>
     <ul class="work" id="workList"></ul>
   </section>
 
   <section id="prints" aria-labelledby="l-prints">
-    <h2 class="label" id="l-prints"><span>Prints</span><span class="r">Made to order · UK</span></h2>
+    <svg class="ridgeline" viewBox="0 0 680 22" preserveAspectRatio="none" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round" d="M0 21h120l26-9 14 5 22-14 12 7 18-10 16 13 20-6 24 14h408"/></svg>
+    <h2 class="label" id="l-prints"><span class="l"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M1 14 6.2 4.5l2.3 3.7L10.4 6 15 14z"/></svg>Prints</span><span class="r">Made to order · UK</span></h2>
     <div class="bleed">
       <div class="prints-head">
         <h2>Fine art prints</h2>
@@ -318,12 +290,14 @@ legend{font:500 11.5px/1 var(--f-mono);letter-spacing:.08em;text-transform:upper
   </section>
 
   <section id="places" aria-labelledby="l-places">
-    <h2 class="label" id="l-places"><span>Places</span><span class="r">Tap to enlarge</span></h2>
+    <svg class="ridgeline" viewBox="0 0 680 22" preserveAspectRatio="none" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round" d="M0 21h120l26-9 14 5 22-14 12 7 18-10 16 13 20-6 24 14h408"/></svg>
+    <h2 class="label" id="l-places"><span class="l"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M1 14 6.2 4.5l2.3 3.7L10.4 6 15 14z"/></svg>Summits &amp; places</span><span class="r">Tap to enlarge</span></h2>
     <div class="grid" id="grid"></div>
   </section>
 
   <section id="film" aria-labelledby="l-film">
-    <h2 class="label" id="l-film"><span>Film</span><span class="r">YouTube</span></h2>
+    <svg class="ridgeline" viewBox="0 0 680 22" preserveAspectRatio="none" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round" d="M0 21h120l26-9 14 5 22-14 12 7 18-10 16 13 20-6 24 14h408"/></svg>
+    <h2 class="label" id="l-film"><span class="l"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M1 14 6.2 4.5l2.3 3.7L10.4 6 15 14z"/></svg>Film</span><span class="r">YouTube</span></h2>
     <a class="vid" href="https://youtu.be/DmN5duTaBKY" target="_blank" rel="noopener">
       <img src="img/film/santiago-ushuaia.jpg" alt="Our muddy Honda CR-V on the road to El Chaltén with Fitz Roy behind" width="960" height="640" loading="lazy">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M7 4.5v15l13-7.5z"/></svg></span>
@@ -333,18 +307,21 @@ legend{font:500 11.5px/1 var(--f-mono);letter-spacing:.08em;text-transform:upper
   </section>
 
   <section id="guides" aria-labelledby="l-guides" hidden>
-    <h2 class="label" id="l-guides">Travel guides</h2>
+    <svg class="ridgeline" viewBox="0 0 680 22" preserveAspectRatio="none" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round" d="M0 21h120l26-9 14 5 22-14 12 7 18-10 16 13 20-6 24 14h408"/></svg>
+    <h2 class="label" id="l-guides"><span class="l"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M1 14 6.2 4.5l2.3 3.7L10.4 6 15 14z"/></svg>Travel guides</span></h2>
     <ul class="work" id="guideList"></ul>
   </section>
 
   <section id="kit" aria-labelledby="l-kit" hidden>
-    <h2 class="label" id="l-kit">Kit I use</h2>
+    <svg class="ridgeline" viewBox="0 0 680 22" preserveAspectRatio="none" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round" d="M0 21h120l26-9 14 5 22-14 12 7 18-10 16 13 20-6 24 14h408"/></svg>
+    <h2 class="label" id="l-kit"><span class="l"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M1 14 6.2 4.5l2.3 3.7L10.4 6 15 14z"/></svg>Kit I use</span></h2>
     <ul class="work" id="kitList"></ul>
     <p class="row desc" style="padding:12px 0 0;margin:0;color:var(--faint);font-size:13px">Some of these are affiliate links. If you buy through one I may earn a small commission at no extra cost to you.</p>
   </section>
 
   <section id="contact" aria-labelledby="l-contact">
-    <h2 class="label" id="l-contact">Contact</h2>
+    <svg class="ridgeline" viewBox="0 0 680 22" preserveAspectRatio="none" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round" d="M0 21h120l26-9 14 5 22-14 12 7 18-10 16 13 20-6 24 14h408"/></svg>
+    <h2 class="label" id="l-contact"><span class="l"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M1 14 6.2 4.5l2.3 3.7L10.4 6 15 14z"/></svg>Contact</span></h2>
     <div class="mailrow">
       <a class="mail" id="email" href="mailto:jack@greensideprojects.com">jack@greensideprojects.com</a>
       <button class="btn" type="button" id="copy">Copy</button>
@@ -352,8 +329,11 @@ legend{font:500 11.5px/1 var(--f-mono);letter-spacing:.08em;text-transform:upper
   </section>
 
   <footer>
-    <span>© 2026 Jack Irving · Photographs are copyright and not for reuse without permission</span>
-    <span>Doncaster, South Yorkshire</span>
+    <svg class="range" viewBox="0 0 680 90" aria-hidden="true"><path fill="currentColor" d="M0 90V70l40-14 28 8 44-30 22 12 30-26 18 14 26-34 14 18 18-24 16 22 22-12 30 32 40 6 46-22 34 14 50-18 40 16 48-24 30 12 36-20 26 14 40-2 30-12 32 14v68z"/><path fill="none" stroke="#ECEFE9" stroke-opacity=".18" stroke-width="1" stroke-linejoin="round" d="M0 70l40-14 28 8 44-30 22 12 30-26 18 14 26-34 14 18 18-24 16 22 22-12 30 32 40 6 46-22 34 14 50-18 40 16 48-24 30 12 36-20 26 14 40-2 30-12 32 14"/></svg>
+    <div class="foot">
+      <span>© 2026 Jack · Photographs are copyright and not for reuse without permission</span>
+      <span>Doncaster · 53.52°N 1.13°W</span>
+    </div>
   </footer>
 </div>
 
@@ -399,6 +379,7 @@ const WORK = [
   {name:"ChaseMate", what:"Founder", m:"CM", c:"#E2AE3A", t:"#16243D", desc:"Chases quotes and unpaid invoices for UK tradespeople by email and text, written the way you write.", url:"https://mychasemate.co.uk"},
   {name:"SafeScrape", what:"Founder", m:"SS", c:"#2BB5A0", t:"#0F2A26", desc:"A nylon thumb scraper for burnt-on mess, stickers and wax. Scrapes everything, scratches nothing.", url:"https://safescrape.co.uk"},
   {name:"Two Trees Outdoors", what:"Co-founder", m:"TT", c:"#EE5B3A", t:"#33170F", desc:"Hammocks and tarps for wild camping. Two trees planted for every order.", url:"https://twotreesoutdoors.com"},
+  {name:"Grub’dup", what:"Side project", m:"G", c:"#B7CE47", t:"#1F4D38", desc:"A meal planner I made for friends and family. Picks dinners, plans the week and writes the shopping list.", url:"/grubdup/"},
   {name:"Irvo Prints", what:"Photographer", m:"IP", c:"#E896B4", t:"#331A27", desc:"Fine art prints from South America and home, shot on a Sony A7C II and a DJI drone.", url:"#prints"},
 ];
 
@@ -471,7 +452,7 @@ const PRINTS = [
 ];
 const PLACES = [
   {src:"img/huayna-potosi.jpg", where:"Huayna Potosí", det:"Bolivia · 6,088m", pos:"50% 50%"},
-  {src:"img/nevis.jpg", where:"CMD Arête", det:"Ben Nevis · winter", pos:"35% 60%"},
+  {src:"img/nevis.jpg", where:"CMD Arête", det:"Ben Nevis · 1,345m · winter", pos:"35% 60%"},
   {src:"img/galapagos-turtle.jpg", where:"Galápagos", det:"Ecuador · green turtle", pos:"50% 55%"},
   {src:"img/deux-alpes.jpg", where:"Les Deux Alpes", det:"France · black run, sunset", pos:"50% 40%"},
   {src:"img/cambodia.jpg", where:"Cambodia", det:"Rooftop at night", pos:"35% 50%"},
